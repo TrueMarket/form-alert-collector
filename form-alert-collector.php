@@ -12,9 +12,8 @@
  * HOW IT WORKS
  *
  * Installed once, on a site the team runs. Each client site's Form Alert
- * (2.2.24 or later) posts a signed JSON report here every hour (see Form Alert's
- * includes/class-wpel-health.php and the "Health reports" section of its
- * README for the format). This plugin:
+ * (2.2.24 or later) posts a signed JSON report here every hour (the format is
+ * documented in Form Alert's includes/class-wpel-health.php). This plugin:
  *
  *  1) RECEIVES  POST /wp-json/form-alert-collector/v1/report
  *     Checks the HMAC signature against the shared secret, then stores the

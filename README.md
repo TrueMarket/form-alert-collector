@@ -1,6 +1,6 @@
 # Form Alert Collector
 
-Collects the hourly health reports that [Form Alert](https://github.com/TrueMarket/mailgun-watch) sends from every client site, lists every site on one page, and alerts the team in **Slack** when a site's email looks broken or the site stops reporting.
+Collects the hourly health reports that [Form Alert](https://github.com/TrueMarket/form-alert) sends from every client site, lists every site on one page, and alerts the team in **Slack** when a site's email looks broken or the site stops reporting.
 
 Form Alert already alerts each client when an email fails. This covers the failures nobody sees: webhooks that stop arriving (emails stay at Sent, so bounces and unopened emails go unalerted), opens that stop being recorded (so the client gets false unopened alerts), a site dropping off the Mailgun API, or a site going quiet altogether.
 
@@ -43,7 +43,7 @@ add_filter( 'fac_thresholds', function ( $t ) {
 } );
 ```
 
-The rules live here, not in Form Alert, so they can change without a Form Alert release. The report format is documented in Form Alert's README, under *Health reports*.
+The rules live here, not in Form Alert, so they can change without a Form Alert release. The report format is documented in Form Alert's `includes/class-wpel-health.php` (the file header and `snapshot()`).
 
 ## How alerts work
 
