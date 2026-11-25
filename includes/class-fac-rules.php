@@ -80,13 +80,19 @@ class FAC_Rules {
 				'Every Mailgun webhook is rejected without it, so emails stay at Sent, bounces aren\'t alerted and opens aren\'t recorded. Add it on the Sending tab.'
 			);
 		} elseif ( $api ) {
-			$stuck = (int) self::get( $report, 'counts.stuck_sent_api', 0 );
+			// Only emails sent after the newest one a webhook confirmed count
+			// (Form Alert 2.2.26+), so once an outage is fixed the emails it
+			// stranded don't keep this open for the rest of the week. Older
+			// versions only report the week's total.
+			$week  = (int) self::get( $report, 'counts.stuck_sent_api', 0 );
+			$stuck = (int) self::get( $report, 'counts.stuck_sent_api_since_reconciled', $week );
 			if ( $stuck >= $t['stuck_sent'] ) {
 				$found['webhooks_missing'] = self::problem(
 					'Webhooks aren\'t arriving',
 					sprintf(
-						'%s sent through Mailgun this week %s still at Sent after 2+ hours, so bounces and unopened emails aren\'t being alerted. %s',
+						'%s sent through Mailgun %s %s still at Sent after 2+ hours, so bounces and unopened emails aren\'t being alerted. %s',
 						self::count( $stuck, 'email', 'emails' ),
+						$stuck < $week ? 'since the last one a webhook confirmed' : 'this week',
 						1 === $stuck ? 'is' : 'are',
 						self::webhook_hint( $report, $now )
 					)

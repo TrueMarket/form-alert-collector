@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Form Alert Collector
  * Description: Receives the hourly health reports sent by every site running Form Alert, shows them on one page, and alerts the team in Slack when a site's email looks broken or the site stops reporting.
- * Version:     0.1.0
+ * Version:     0.1.1
  * Author:      True Market
  * Author URI:  https://truemarket.ca
  * License:     GPL-2.0-or-later
@@ -50,7 +50,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'FAC_VERSION', '0.1.0' );
+define( 'FAC_VERSION', '0.1.1' );
 define( 'FAC_OPTION', 'fac_settings' );
 define( 'FAC_DIR', plugin_dir_path( __FILE__ ) );
 define( 'FAC_FILE', __FILE__ );

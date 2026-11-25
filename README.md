@@ -23,7 +23,7 @@ Each report is checked against these rules. A rule only fires when the site actu
 
 | Problem | When |
 |---|---|
-| **Webhooks aren't arriving** | 2+ emails sent through the Mailgun API in the last 7 days are still at Sent after 2 hours. The message says whether webhooks are being rejected (wrong signing key), have never arrived, or stopped at a given time. |
+| **Webhooks aren't arriving** | 2+ emails sent through the Mailgun API in the last 7 days are still at Sent after 2 hours. From Form Alert 2.2.26, only emails sent after the newest one a webhook moved past Sent (to Delivered, Failed and so on) count, so the problem clears as soon as webhooks work again instead of once the stranded emails are a week old. The message says whether webhooks are being rejected (wrong signing key), have never arrived, or stopped at a given time. |
 | **No webhook signing key** | The site sends through the API but has no signing key, so every webhook is rejected. |
 | **Opens aren't being recorded** | Track opens is on, 10+ emails were delivered in the last 7 days, and none were opened. Usually the `opened` event is missing from the Mailgun webhook. |
 | **Dropped to the SMTP fallback** | The site was on the Mailgun API and now sends through the shared SMTP fallback (no tracking). Stays flagged until it's back on the API or muted. Sites that have always used the fallback aren't flagged. |
